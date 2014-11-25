@@ -8,25 +8,31 @@ clc;
 clf;
 close;
 
-Transmitter_Loc = [5,5];
-Receiver_Loc = [1,1; 1,3; 1,6; 1,13];
+Transmitter_Loc = [2,1,0];
+Receiver_Loc = [1,1,0; 1,2,0; 1,3,0; 1,4,0; 1,5,0; 1,6,0; 1,7,0; 1,8,0; 1,9,0];
+Projection_Coordinates = [5,0,-2;5,10,-2;5,10,2]; %First left up, then left down, then right down
 
+
+%frequentie vast op 4 KHz
 Screen_Heigth = 20;
-Screen_Width = 30;
+Screen_Width = 50;
 Sample_Length = 1000;
-Min_freq = 2000;
-Max_freq = 10000;
+Min_freq = 200;
+Max_freq = 1000;
 
 Pixel_Matrix = zeros(Screen_Heigth,Screen_Width);
 
-
+disp ('Initialization DONE');
 %% Forward (calculate what is measured by the transducers)
 Receiver_Data = Forward_Function( Transmitter_Loc, Receiver_Loc, Sample_Length, Min_freq, Max_freq);
 
-
+disp ('Forward function DONE');
 
 %% Invserse (Reconstruct the image)
-Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, Sample_Length, Min_freq, Max_freq);
+Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, Sample_Length, Min_freq, Max_freq, Projection_Coordinates);
+
+
+disp ('Inverse function DONE');
 
 % Visualizer = Pixel_Matrix;
 % for i =1:size(Transmitter_Loc,1)
@@ -40,20 +46,22 @@ Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, Samp
 % Visualizer=flipud(Visualizer);
 
 %% Make Image
-F =  1:Sample_Length
 
 figure(1)
-subplot(4,1,1);
-imagesc(abs(Receiver_Data(1,:)));
-%plot(F,abs(Receiver_Data(1,:)));
-subplot(4,1,2);
-imagesc(abs(Receiver_Data(2,:)));
+%F =  1:Sample_Length;
+% subplot(4,1,1);
+% imagesc(imag(Receiver_Data(1,:)));
+% %plot(F,abs(Receiver_Data(1,:)));
+% subplot(4,1,2);
+% imagesc(imag(Receiver_Data(2,:)));
+% 
+% subplot(4,1,3);
+% imagesc(imag(Receiver_Data(3,:)));
+% 
+% subplot(4,1,4);
+% imagesc(imag(Receiver_Data(4,:)));
 
-subplot(4,1,3);
-imagesc(abs(Receiver_Data(3,:)));
-
-subplot(4,1,4);
-imagesc(abs(Receiver_Data(4,:)));
+imagesc(real(Pixel_Matrix));
 colormap(gray);
 
 
