@@ -15,7 +15,6 @@ Pixel_Loc = zeros(1,3);
 
 %Calculate magnitude for each pixel
 for i=1:Screen_Width
-    i
     for j=1:Screen_Heigth
         Pixel_Loc = Projection_Coordinates(1,:) + (Projection_Coordinates(2,:)-Projection_Coordinates(1,:))/Screen_Heigth*j + (Projection_Coordinates(3,:)-Projection_Coordinates(2,:))/Screen_Width*i;
         
