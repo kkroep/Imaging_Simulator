@@ -6,8 +6,7 @@ function [ Receiver_Data_row ] = Forward_Formula( Transmitter_Loc, Receiver_Loc 
 Geluidssnelheid = 3*10^8;
 
 W = 1;
-S = frequentie;
-S = 1i*2*pi*S;
+S = 1i*2*pi*frequentie;
 
 
 Receiver_Data_row=W*exp(-S/Geluidssnelheid*norm(Transmitter_Loc-Receiver_Loc))/(4*pi*norm(Transmitter_Loc-Receiver_Loc));

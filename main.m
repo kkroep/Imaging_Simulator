@@ -3,7 +3,7 @@
 %By: Kees Kroep
 
 %% Initialization
-clear all;
+% clear all;
 clc;
 clf;
 close;
