@@ -1,4 +1,4 @@
-function [ Receiver_Data ] = Forward_Function( Transmitter_Loc, Receiver_Loc, frequentie, Source, x, y, z)
+function [ Receiver_Data ] = Forward_Function( Transmitter_Loc, Receiver_Loc, frequentie, Source)
 %This function calculates the measured data of the transducers
 %By; Kees KRoep
 
@@ -20,13 +20,7 @@ function [ Receiver_Data ] = Forward_Function( Transmitter_Loc, Receiver_Loc, fr
 A = zeros(size(Receiver_Loc,1),length(Source));
 
 for i=1:size(Receiver_Loc,1)
-    for  a = 1:x
-        for b = 1:y
-            for c = 1:z
-            A(i,a+b*x+c*y*x)=1;
-            end
-        end
-    end
+    
 end
 
 

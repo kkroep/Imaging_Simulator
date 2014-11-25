@@ -25,13 +25,14 @@ Source = Initialization( Start_point, x, y, z);
 
 
 disp ('Initialization DONE');
+
 %% Forward (calculate what is measured by the transducers)
-Receiver_Data = Forward_Function( Transmitter_Loc, Receiver_Loc, frequentie, Source);
+Receiver_Data = Forward_Function( Transmitter_Loc, Receiver_Loc, frequentie, Source,  x, y, z);
 
 disp ('Forward function DONE');
 
 %% Invserse (Reconstruct the image)
-Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, frequentie, Projection_Coordinates);
+Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, frequentie, Projection_Coordinates, x, y, z);
 
 
 disp ('Inverse function DONE');
@@ -63,7 +64,7 @@ figure(1)
 % subplot(4,1,4);
 % imagesc(imag(Receiver_Data(4,:)));
 
-imagesc(real(Pixel_Matrix));
+imagesc(real(Pixel_Matrix(:,:,6)));
 colormap(gray);
 
 
