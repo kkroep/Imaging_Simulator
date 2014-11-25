@@ -13,23 +13,21 @@ Receiver_Loc = [1,1,0; 1,2,0; 1,3,0; 1,4,0; 1,5,0; 1,6,0; 1,7,0; 1,8,0; 1,9,0];
 Projection_Coordinates = [5,0,-2;5,10,-2;5,10,2]; %First left up, then left down, then right down
 
 
-%frequentie vast op 4 KHz
+
 Screen_Heigth = 20;
 Screen_Width = 50;
-Sample_Length = 1000;
-Min_freq = 200;
-Max_freq = 1000;
+frequentie = 4000; %frequentie vast op 4 KHz
 
 Pixel_Matrix = zeros(Screen_Heigth,Screen_Width);
 
 disp ('Initialization DONE');
 %% Forward (calculate what is measured by the transducers)
-Receiver_Data = Forward_Function( Transmitter_Loc, Receiver_Loc, Sample_Length, Min_freq, Max_freq);
+Receiver_Data = Forward_Function( Transmitter_Loc, Receiver_Loc, frequentie);
 
 disp ('Forward function DONE');
 
 %% Invserse (Reconstruct the image)
-Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, Sample_Length, Min_freq, Max_freq, Projection_Coordinates);
+Pixel_Matrix = Inverse_Function( Receiver_Loc, Receiver_Data, Pixel_Matrix, frequentie, Projection_Coordinates);
 
 
 disp ('Inverse function DONE');
