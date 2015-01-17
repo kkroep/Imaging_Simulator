@@ -51,13 +51,18 @@ function Imaging_GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to Imaging_GUI (see VARARGIN)
-handles.Data = varargin{1}.*abs(varargin{1});
+handles.Data = varargin{1}*abs(); 
 handles.S_Directions = varargin{2}; 
 imagesc(real(handles.Data(:,:,1)));
 colormap(gray);
 
+
+
+disp(max(handles.Data(:)));
+disp(max(handles.Data(:)*-1));
+
 handles.rangemax = max(handles.Data(handles.Data>0));
-handles.rangemin = min(handles.Data(handles.Data<0));
+handles.rangemin = max(handles.Data(handles.Data<0));
 
 
 set(handles.text3, 'String', varargin{3}{1});

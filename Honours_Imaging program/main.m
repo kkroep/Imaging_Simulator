@@ -8,10 +8,10 @@ disp('IMAGING SIMULATOR by Kees Kroep');
 
 S_Resolution = 1E-3; %distance between voxels
 S_Start = [0,0,0]; % the s  tartlocation of the sourcespace
-S_Directions = [32,32,32];
+S_Directions = [64,64,64];
 V_Slices = [1,3,5,7]; % four slices out of the measured data
 %frequency = 50000; % hz, we currenlt0y only use one frequency
-frequency2 = [10000, 50000, 70000];
+frequency2 = [7000, 40000, 70000];
 new_Source_3D = zeros(S_Directions(1),S_Directions(2),S_Directions(3));
 
 c = 320; %speed of sound 
@@ -126,4 +126,4 @@ transmitter_string{i} = strcat('[',num2str(Transmitter_locs(i,1)), ',', num2str(
 end
 
 whos; %View workspace
-Imaging_GUI(new_Source_3D.^2, S_Directions, transmitter_string);
+Imaging_GUI(real(new_Source_3D), S_Directions, transmitter_string);
