@@ -119,7 +119,7 @@ elseif(handles.axis=='Y')
     set(handles.text2, 'String', num2str(tmp));
 else
     tmp = ceil(handles.Depth*(handles.S_Directions(1)-1)+1);
-    imagesc(real(permute(handles.Data(tmp,:,:),[3,2,1])));
+    imagesc(real(permute(handles.Data(tmp,:,:),[2,3,1])));
     set(handles.text2, 'String', num2str(tmp));
 end
 caxis([handles.rangemin, handles.rangemax]);
@@ -195,10 +195,10 @@ elseif(handles.axis=='Y')
     set(handles.text5, 'String', 'X');
 else
     tmp = ceil(handles.Depth*(handles.S_Directions(1)-1)+1);
-    imagesc(real(permute(handles.Data(tmp,:,:),[3,2,1])));
+    imagesc(real(permute(handles.Data(tmp,:,:),[2,3,1])));
     set(handles.text2, 'String', num2str(tmp));
-    set(handles.text4, 'String', 'Z');
-    set(handles.text5, 'String', 'Y');
+    set(handles.text4, 'String', 'Y');
+    set(handles.text5, 'String', 'Z');
 end
 
 caxis([handles.rangemin, handles.rangemax]);
