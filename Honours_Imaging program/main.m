@@ -99,8 +99,6 @@ clear(varlist2{:});
 disp('TODOLIST:');
 
 fprintf('-\treceivers op een bol gooien\n');
-fprintf('-\tGUI imaging op zn kop geplot\n');
-fprintf('-\tGUI start niet netjes\n');
 fprintf('-\truis op data (experiementeren)\n');
 fprintf('-\textra snelheidswinst?\n');
 

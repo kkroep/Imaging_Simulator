@@ -51,10 +51,25 @@ function Imaging_GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to Imaging_GUI (see VARARGIN)
+
+axes(handles.ScatterPlot);
+[Receiver_locs, Transmitter_locs] = Transducer_Init(1E-3);
+scatter3(Receiver_locs(:,1),Receiver_locs(:,2),Receiver_locs(:,3))
+hold on
+scatter3(Transmitter_locs(:,1),Transmitter_locs(:,2),Transmitter_locs(:,3),'filled')
+hold off
+rotate3d on;
+axes(handles.US_scan);
+setAllowAxesRotate(rotate3d,handles.US_scan,false);
+
+
 handles.Data = varargin{1}.*abs(varargin{1});
 handles.S_Directions = varargin{2}; 
 imagesc(real(handles.Data(:,:,1)));
 colormap(gray);
+
+set(gca,'YDir','normal');
+
 
 handles.rangemax = max(handles.Data(handles.Data>0));
 handles.rangemin = min(handles.Data(handles.Data<0));
@@ -70,15 +85,7 @@ handles.Depth = 0;
 
 
 %plot the location of the transmitters and receivers
-axes(handles.ScatterPlot);
-[Receiver_locs, Transmitter_locs] = Transducer_Init(1E-3);
-scatter3(Receiver_locs(:,1),Receiver_locs(:,2),Receiver_locs(:,3))
-hold on
-scatter3(Transmitter_locs(:,1),Transmitter_locs(:,2),Transmitter_locs(:,3),'filled')
-hold off
-rotate3d on;
-axes(handles.US_scan);
-setAllowAxesRotate(rotate3d,handles.US_scan,false);
+
 
 
 guidata(hObject, handles);
@@ -124,6 +131,7 @@ else
 end
 caxis([handles.rangemin, handles.rangemax]);
 setAllowAxesRotate(rotate3d,handles.US_scan,false);
+set(gca,'YDir','normal');
 guidata(hObject, handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -203,7 +211,7 @@ end
 
 caxis([handles.rangemin, handles.rangemax]);
 setAllowAxesRotate(rotate3d,handles.US_scan,false);
-
+set(gca,'YDir','normal');
 guidata(hObject, handles);
 
 
