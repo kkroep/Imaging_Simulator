@@ -22,7 +22,7 @@ function varargout = Imaging_GUI(varargin)
 
 % Edit the above text to modify the response to help Imaging_GUI
 
-% Last Modified by GUIDE v2.5 17-Jan-2015 01:34:02
+% Last Modified by GUIDE v2.5 11-Feb-2015 14:27:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -59,12 +59,7 @@ colormap(gray);
 handles.rangemax = max(handles.Data(handles.Data>0));
 handles.rangemin = min(handles.Data(handles.Data<0));
 
-
-set(handles.text3, 'String', varargin{3}{1});
-for i = 2:size(varargin{3},2)
-contents = get(handles.text3,'String');
-set(handles.text3,'String',[contents;varargin{3}{i}]);
-end
+set(handles.text3, 'String', varargin{3});
 
 caxis([handles.rangemin, handles.rangemax]);
 % Choose default command line output for Imaging_GUI
@@ -72,6 +67,20 @@ handles.output = hObject;
 handles.axis = 'Z';
 handles.Depth = 0;
 % Update handles structure
+
+
+%plot the location of the transmitters and receivers
+axes(handles.ScatterPlot);
+[Receiver_locs, Transmitter_locs] = Transducer_Init(1E-3);
+scatter3(Receiver_locs(:,1),Receiver_locs(:,2),Receiver_locs(:,3))
+hold on
+scatter3(Transmitter_locs(:,1),Transmitter_locs(:,2),Transmitter_locs(:,3),'filled')
+hold off
+rotate3d on;
+axes(handles.US_scan);
+setAllowAxesRotate(rotate3d,handles.US_scan,false);
+
+
 guidata(hObject, handles);
 
 % UIWAIT makes Imaging_GUI wait for user response (see UIRESUME)
@@ -98,6 +107,7 @@ function slider1_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
+axes(handles.US_scan);
 handles.Depth = get(hObject,'Value');
 if(handles.axis=='Z')
     tmp = ceil(handles.Depth*(handles.S_Directions(3)-1)+1);
@@ -168,8 +178,8 @@ function uipanel1_SelectionChangeFcn(hObject, eventdata, handles)
 %	NewValue: handle of the currently selected object
 % handles    structure with handles and user data (see GUIDATA)
 handles.axis=get(eventdata.NewValue, 'Tag');
-disp(handles.axis);
 %fprintf('Depth axis:   %s\n', handles.axis);
+axes(handles.US_scan);
 if(handles.axis=='Z')
     tmp = ceil(handles.Depth*(handles.S_Directions(3)-1)+1);
     imagesc(real(permute(handles.Data(:,:,tmp),[2,1,3])));
@@ -189,5 +199,38 @@ else
     set(handles.text4, 'String', 'Y');
     set(handles.text5, 'String', 'Z');
 end
+
 caxis([handles.rangemin, handles.rangemax]);
+
+
+
 guidata(hObject, handles);
+
+
+function axes1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axes1
+
+
+% --- Executes during object creation, after setting all properties.
+function axes2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axes2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axes2
+
+% Hint: place code in OpeningFcn to populate axes2
+
+
+
+% scatter3(Receiver_locs(:,1),Receiver_locs(:,2),Receiver_locs(:,3))
+% hold on
+% scatter3(Transmitter_locs(:,1),Transmitter_locs(:,2),Transmitter_locs(:,3),'filled')
+% hold off
+
+
+% --- Executes during object creation, after setting all properties.

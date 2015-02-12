@@ -95,8 +95,7 @@ disp('Frequency_Loop DONE');
 %representatie
 varlist1 = {'x','y','z', 'varlist1'};
 clear(varlist1{:}); 
-varlist2 = {'S_Resolution', 'frequency', 'c', 'S_Start', 'varlist2', 'i', ...
-                           'new_Source', 'old_Receiver_locs', 'old_S_Directions', 'old_frequency2', 'transmitter_string'};
+varlist2 = {'S_Resolution', 'frequency', 'c', 'S_Start', 'S_dimensions', 'varlist2'};
 clear(varlist2{:});
 
 
@@ -107,7 +106,7 @@ disp('TODOLIST:');
 
 fprintf('-\treceivers op een bol gooien\n');
 fprintf('-\truis op data (experiementeren)\n');
-fprintf('-\textra snelheidswinst?\n');
+fprintf('-\tergens snelheidswinst vandaan halen?\n');
 
 
 %Make a cell-array of strings used for the GUI
